@@ -1,3 +1,6 @@
+from __future__ import division
+from __future__ import print_function
+from future.builtins import range
 
 import numpy as np
 import scipy.linalg
@@ -101,7 +104,7 @@ class ktICA(BaseLearner, ProjectingMixin, CrossValidatingMixin):
 
         if precomputed_K is None:
             K = np.zeros((N, N))
-            for i in xrange(N):
+            for i in range(N):
                 K[i] = self.kernel.one_to_all(self._Xall, self._Xall, i)
 
         else:
@@ -237,7 +240,7 @@ class ktICA(BaseLearner, ProjectingMixin, CrossValidatingMixin):
 
         comp_to_all = []
 
-        for i in xrange(len(self._Xall)):
+        for i in range(len(self._Xall)):
             comp_to_all.append(self.kernel.one_to_all(self._Xall, X, i))
         
         comp_to_all = np.array(comp_to_all).T
@@ -346,7 +349,7 @@ class ktICA(BaseLearner, ProjectingMixin, CrossValidatingMixin):
         s = np.sum(ratio)
         rel = np.abs((ratio - vals) / vals).sum()
 
-        print "l1: %.2e - l2: %.2e - sum: %.2e - rel: %.2e" % (l1, l2, s, rel)
+        print("l1: %.2e - l2: %.2e - sum: %.2e - rel: %.2e" % (l1, l2, s, rel))
 
         if scheme == 'l1':
             score = np.abs(ratio - vals).sum()
@@ -502,7 +505,7 @@ class ktICA(BaseLearner, ProjectingMixin, CrossValidatingMixin):
 
         if not kernel is None:
             kernel = kernel
-        elif 'kernel_str' in f.keys():
+        elif 'kernel_str' in list(f.keys()):
             kernel = pickle.loads(f['kernel_str'][0])
         else:
             raise Exception("kernel_str not found in %s. Need to pass a kernel object")

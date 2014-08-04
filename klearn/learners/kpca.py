@@ -1,3 +1,6 @@
+from __future__ import division
+from __future__ import print_function
+from future.builtins import range
 
 import numpy as np
 import scipy.linalg
@@ -55,14 +58,14 @@ class kPCA(BaseLearner, ProjectingMixin):
 
         K = np.zeros((N, N))
 
-        for i in xrange(N):
+        for i in range(N):
             K[i] = self.kernel(self._Xall, self._Xall, i)
 
         # now normalize the matrices.
         self.K = np.zeros((N, N))
 
         one_N = np.ones((N, N)) / float(N)
-        print one_N
+        print(one_N)
 
         self.K = K - one_N.dot(K) - K.dot(one_N) + one_N.dot(K).dot(one_N)
 
@@ -125,7 +128,7 @@ class kPCA(BaseLearner, ProjectingMixin):
 
         comp_to_all = []
         
-        for i in xrange(len(self._Xall)):
+        for i in range(len(self._Xall)):
             comp_to_all.append(self.kernel(self._Xall, trajectory, i))
         
         comp_to_all = np.array(comp_to_all).T

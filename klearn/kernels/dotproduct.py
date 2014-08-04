@@ -1,3 +1,4 @@
+from future.builtins import str
 
 from .baseclasses import AbstractKernel
 from msmbuilder.metrics.baseclasses import Vectorized

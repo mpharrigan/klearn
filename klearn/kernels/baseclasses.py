@@ -1,3 +1,6 @@
+from __future__ import division
+from future.builtins import range
+from future.builtins import object
 import abc
 import numpy as np
 import warnings
@@ -26,13 +29,13 @@ class AbstractKernel(object):
 
     def all_to_all(self, prepared_traj1, prepared_traj2):
         
-        return np.vstack([self.one_to_all( prepared_traj1, prepared_traj2, i ) for i in xrange(len(prepared_traj1))])
+        return np.vstack([self.one_to_all( prepared_traj1, prepared_traj2, i ) for i in range(len(prepared_traj1))])
             
     def all_pairwise(self, prepared_traj):
         traj_length = len(prepared_traj)
         output = -1 * np.ones(traj_length * (traj_length - 1) / 2)
         p = 0
-        for i in xrange(traj_length):
+        for i in range(traj_length):
             cmp_indices = np.arange(i, traj_length)
             output[p: p + len(cmp_indices)] = self.one_to_many(prepared_traj, prepared_traj, i, cmp_indices)
             p += len(cmp_indices)

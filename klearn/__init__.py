@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 
 def _setup_logging():
     import logging
@@ -14,5 +15,5 @@ def _setup_logging():
 
 _setup_logging()
 
-from learners.ktica import ktICA
-from learners.kpca import kPCA
+from .learners.ktica import ktICA
+from .learners.kpca import kPCA

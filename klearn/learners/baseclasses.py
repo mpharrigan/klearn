@@ -1,13 +1,13 @@
+from future.builtins import object
 import abc
 from klearn.kernels import AbstractKernel
+from future.utils import with_metaclass
 
-class BaseLearner(object):
+class BaseLearner(with_metaclass(abc.ABCMeta, object)):
     """
     Basic learner that implements what we want from the kernel 
     learners
     """
-
-    __metaclass__ = abc.ABCMeta
 
     def __init__(self, kernel):
         
@@ -58,12 +58,10 @@ class BaseLearner(object):
         raise NotImplementedError("not implemented!")
 
 
-class CrossValidatingMixin(object):
+class CrossValidatingMixin(with_metaclass(abc.ABCMeta, object)):
     """
     mixin for learners that can be cross-validated
     """
-    
-    __metaclass__ = abc.ABCMeta
 
     @abc.abstractmethod
     def evaluate(self, X):
@@ -74,14 +72,12 @@ class CrossValidatingMixin(object):
         raise NotImplementedError("not implemented!")
 
 
-class ProjectingMixin(object):
+class ProjectingMixin(with_metaclass(abc.ABCMeta, object)):
     """
     mixin for learners that project new data onto some
     solutions. I.e. these learners will transform the 
     data into one or more dimensions
     """
-
-    __metaclass__ = abc.ABCMeta
 
     @abc.abstractmethod
     def project(self, X, num_vecs=10):
