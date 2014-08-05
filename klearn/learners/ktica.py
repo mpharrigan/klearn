@@ -147,7 +147,7 @@ class ktICA(BaseLearner, ProjectingMixin, CrossValidatingMixin):
         if self.K is None:
             self.calculate_matrices()
 
-        N = self.K.shape[0] / 2
+        N = self.K.shape[0] // 2
 
         rot_mat = np.zeros((2 * N, 2 * N))
         rot_mat[:N, N:] = np.eye(N)
